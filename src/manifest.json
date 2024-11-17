@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "Chrome Base Extension with Typescript",
+    "description": "Chrome Base Extension with Typescript",
+    "version": "1.0",
+    "action": {
+      "default_icon": "logo.png",
+      "default_title": "Chrome Base Extension",
+      "default_popup": "index.html"
+    },
+    "permissions": ["devtool"],
+    "options_page": "options.html",
+    "background": {
+      "service_worker": "background.js"
+    },
+    "icons": {
+      "48": "logo.png",
+      "96": "logo.png"
+    },
+    "content_scripts": [
+      {
+        "js": ["scripts/content.js"],
+        "matches": ["https://www.example.come/*"]
+      }
+    ]
+}
