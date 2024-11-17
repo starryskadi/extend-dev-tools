@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/chrome": "^0.0.283",
     "browserify": "^17.0.1",
     "gulp": "^5.0.0",
     "gulp-buffer": "^0.0.2",

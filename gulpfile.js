@@ -8,6 +8,8 @@ const rename = require('gulp-rename');
 const browserify = require('browserify');
 const tsify = require("tsify");
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 const DIST_FOLDER = "./dist"
 const fs = require('fs').promises;
 
@@ -55,6 +57,32 @@ function compileTypeScript() {
     .pipe(dest(`${DIST_FOLDER}/scripts`))
 }
 
+
+function watchFiles() {
+    if (isProduction) return done()
+
+    watch(
+        [`src/*.html`],
+        series(compileHTML)
+    );
+    watch(
+        ["src/styles/*.css"],
+        series(compileCSS)
+    );
+    watch(
+        [`src/scripts/*.js`],
+        series(compileTypeScript)
+    );
+    watch(
+        [`src/public/*`],
+        series(compileFiles)
+    );
+    watch(
+        [`src/manifest.json`],
+        series(compileManifest)
+    );   
+}
+
 gulp.task('default', 
     series(
         cleanUp,
@@ -62,6 +90,7 @@ gulp.task('default',
         compileCSS,
         compileTypeScript,
         compileFiles,
-        compileManifest
+        compileManifest,        
+        watchFiles
     )
 )
