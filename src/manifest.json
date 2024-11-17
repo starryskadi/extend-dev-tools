@@ -1,11 +1,11 @@
 {
     "manifest_version": 3,
-    "name": "Chrome Base Extension with Typescript",
-    "description": "Chrome Base Extension with Typescript",
+    "name": "Extend Dev Tools",
+    "description": "Extend Dev Tools (kyawzayarwin.com) - I'm too bored to make some calculation myself. So I created chrome extension to save my day",
     "version": "1.0",
     "action": {
       "default_icon": "logo.png",
-      "default_title": "Chrome Base Extension",
+      "default_title": "Extend Dev Tools (kyawzayarwin.com)",
       "default_popup": "index.html"
     },
     "permissions": ["devtool"],
