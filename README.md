@@ -18,3 +18,14 @@ Now he can stop yelling at his calculator and get back to doing what he does - e
 ![alt text](image.jpg)
 
 Now, it also supported `aspect-ratio`.
+
+### Installation
+
+1. Generate the files
+```bash
+npm install 
+npm run dev
+```
+2. Go to `chrome://extensions`
+3. Enable developer mode, load unpacked page
+4. Select `dist` folder and install it
