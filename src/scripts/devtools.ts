@@ -1,5 +1,6 @@
 const elementProperties = {
     contentWidth: "",    
+    contentHeight: "",
     paddingLeft: "",
     paddingRight: "",
     paddingTop: "",
@@ -16,7 +17,17 @@ function calculatePercentage(part: number, total: number) : number {
     return (part / total) * 100
 }
 
-chrome.devtools.panels.elements.createSidebarPane("Percentage", (sidebar) => {
+function gcd(a, b){
+    return b ? gcd(b, a % b) : a;
+}
+
+function calculateAspectRatio(width, height) {
+    const divisor = gcd(width, height);            
+    return `${width / divisor}:${height / divisor}`;
+}
+
+
+chrome.devtools.panels.elements.createSidebarPane("Extended", (sidebar) => {
     // sidebar.setPage('sidebar.html')
 
     chrome.devtools.panels.elements.onSelectionChanged.addListener(() => {
@@ -34,27 +45,37 @@ chrome.devtools.panels.elements.createSidebarPane("Percentage", (sidebar) => {
                     marginBottom: computedStyle.marginBottom,
                     marginLeft: computedStyle.marginLeft,
                     marginRight: computedStyle.marginRight,
-                    contentWidth: computedStyle.width,                               
+                    contentWidth: computedStyle.width,              
+                    contentHeight: computedStyle.height                 
                 };
             })();
           `,
           (result, isException) => {
             if (isException) {
                 sidebar.setObject(isException, "Error");                
-            } else {
+            } else {                
                 const elementProperies = result as ElementProperies
-                const contentWidth = parseFloat(elementProperies.contentWidth)                
+                const contentWidth = parseFloat(elementProperies.contentWidth)    
+                const contentHeight = parseFloat(elementProperies.contentHeight)                
 
                 const calculateObject = {}
                 
                 Object.keys(elementProperties).filter(key => {
-                    return (key !== "contentWidth" && key !== "parentHeight");
+                    return (key !== "contentWidth" && key !== "contentHeight");
                 }).map((key) => {                    
-                    calculateObject[key] = `${calculatePercentage(parseFloat(elementProperies[key]), contentWidth)}%`
+                    if (parseFloat(elementProperies[key])) {
+                        calculateObject[key] = `${calculatePercentage(parseFloat(elementProperies[key]), contentWidth)}%`
+                    } else {
+                        calculateObject[key] = "0%"
+                    }
                 })
+
                 
-                sidebar.setObject(calculateObject, "Percentage")
-                                
+                calculateObject['padding'] = `${calculateObject["paddingTop"]} ${calculateObject["paddingRight"]} ${calculateObject["paddingBottom"]} ${calculateObject["paddingLeft"]}`;
+                calculateObject['margin'] = `${calculateObject["marginTop"]} ${calculateObject["marginRight"]} ${calculateObject["marginBottom"]} ${calculateObject["marginLeft"]}`;
+                calculateObject['aspect-ratio'] = calculateAspectRatio(contentWidth, contentHeight)
+                
+                sidebar.setObject(calculateObject, "Extended") 
             }
           }
         )
