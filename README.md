@@ -1,4 +1,4 @@
-This extension was crafted by Starry Skadi (kyawzayarwin.com), 
+This extension was crafted by Starry Skadi - [kyawzayarwin.com](https://kyawzayarwin.com)
 
 You see, Starry Skadi, he would like to use percentages for padding and margin. Why? Who knows. But here we are.
 
