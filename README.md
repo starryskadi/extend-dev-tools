@@ -16,3 +16,5 @@ Problem solved.
 Now he can stop yelling at his calculator and get back to doing what he does - enjoy those extra minutes of sleep saved from all that math.
 
 ![alt text](image.jpg)
+
+Now, it also supported `aspect-ratio`.
