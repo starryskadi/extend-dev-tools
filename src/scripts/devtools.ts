@@ -50,7 +50,7 @@ chrome.devtools.panels.elements.createSidebarPane("Percentage", (sidebar) => {
                 Object.keys(elementProperties).filter(key => {
                     return (key !== "contentWidth" && key !== "parentHeight");
                 }).map((key) => {                    
-                    calculateObject[key] = calculatePercentage(parseFloat(elementProperies[key]), contentWidth)                    
+                    calculateObject[key] = `${calculatePercentage(parseFloat(elementProperies[key]), contentWidth)}%`
                 })
                 
                 sidebar.setObject(calculateObject, "Percentage")
