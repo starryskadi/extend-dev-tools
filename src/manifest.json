@@ -1,26 +1,15 @@
 {
     "manifest_version": 3,
     "name": "Extend Dev Tools",
-    "description": "Extend Dev Tools (kyawzayarwin.com) - I'm too bored to make some calculation myself. So I created chrome extension to save my day",
+    "description": "Extend Dev Tools (kyawzayarwin.com)",
     "version": "1.0",
     "action": {
       "default_icon": "logo.png",
-      "default_title": "Extend Dev Tools (kyawzayarwin.com)",
-      "default_popup": "index.html"
-    },
-    "permissions": ["devtool"],
-    "options_page": "options.html",
-    "background": {
-      "service_worker": "scripts/background.js"
-    },
+      "default_title": "Extend Dev Tools (kyawzayarwin.com)"      
+    },    
+    "devtools_page": "devtools.html",
     "icons": {
       "48": "logo.png",
       "96": "logo.png"
-    },
-    "content_scripts": [
-      {
-        "js": ["scripts/contentScript.js"],
-        "matches": ["https://www.example.come/*"]
-      }
-    ]
+    }    
 }

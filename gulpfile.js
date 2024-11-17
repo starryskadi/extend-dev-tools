@@ -70,7 +70,7 @@ function watchFiles() {
         series(compileCSS)
     );
     watch(
-        [`src/scripts/*.js`],
+        [`src/scripts/*.ts`],
         series(compileTypeScript)
     );
     watch(
